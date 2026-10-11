@@ -24,6 +24,7 @@
     <ProjectGuid>{af3bfb8e-75dc-4525-b7ca-5da99d242038}</ProjectGuid>
     <RootNamespace>Pixora</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Asssignment-1-OOP</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

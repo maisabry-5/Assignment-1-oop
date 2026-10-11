@@ -1,177 +1,151 @@
+/*
+Team members:
+    •	Kinzy Ahmad Raouf
+            {ID:20240425}
+             Section: S39,40
 
-/* =================================part 1 =============================== 
-//Team Members & Work Distribution:
-1-kenzi ahmed raof:ID:20240425_filter:1,5
-2-mai sabry shappan:ID:20242360_filter:2,6
-3-nadeen osama marzok:ID:20242364_filter:3,7
-4-marwa mohamed abdelsamad:ID:20251385_filter:4,8
-section:s
-====================================
+    •	Mai Sabry Shapaan
+            {ID: 20242360}
+             Section: S39,40
+
+    •	Nadeen Osama 
+            {ID: 20242364}
+             Section: 
+
+    •	Marwa Mohamed 
+            {ID: }
+            Section:s
+
+
+
+
+
+Solves Filters:
+        -Filters 1 & 5 & 9  & 13 solved by Kinzy Ahmed
+        -Filters 2 & 6 & 10 & 14 solved by Mai Sabry
+        -Filters 3 & 7 & 11 & 15 solved by Nadeen Osama
+        -Filters 4 & 8 & 12 & 16 solved by Marwa Mohamed    
+
+
+        ----
+
+
+
+Project Links
+
+     Video Link :
+
+     Repo link :
+
+     Document Link :
+
+
 */
-
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <string>
-#include <cmath> 
-#include <algorithm>
+#include <vector>
+#include <cmath>
 #include "Image_Class.h"
 
 using namespace std;
 
-
-
-//-------------------------------------------------Filter 1---------------------------------------------------------
-Image image("../OIP.png");
-
-for (int y = 0; y < image.height; y++)
-{
-    for (int x = 0; x < image.width; x++)
-    {
-        unsigned char r = image(x, y, 0);
-        unsigned char g = image(x, y, 1);
-        unsigned char b = image(x, y, 2);
-
-        unsigned char gray = (r + g + b) / 3;
-
-        image(x, y, 0) = gray;
-        image(x, y, 1) = gray;
-        image(x, y, 2) = gray;
+//  Grayscale Filter 
+void GrayscaleFilter(Image& img) {
+    for (int y = 0; y < img.height; y++) {
+        for (int x = 0; x < img.width; x++) {
+            unsigned char r = img(x, y, 0);
+            unsigned char g = img(x, y, 1);
+            unsigned char b = img(x, y, 2);
+            unsigned char gray = (r + g + b) / 3;
+            img(x, y, 0) = gray;
+            img(x, y, 1) = gray;
+            img(x, y, 2) = gray;
+        }
     }
 }
 
-image.saveImage("grayscale.png");
-
-return 0;
-}
-
-//-------------------------------------------------Filter 2-------------------------------------------------------------
-void BW(Image& img) {
-    for (int j = 0; j < img.height; j++) {
-        for (int i = 0; i < img.width; i++) {
+//  Black & White Filter
+void BW(Image& img)
+{
+    for (int j = 0; j < img.height; j++)
+    {
+        for (int i = 0; i < img.width; i++) 
+        {
             int avg = 0;
-            for (int k = 0; k < 3; k++) {
+            for (int k = 0; k < 3; k++) 
+            {
+
                 avg += img(i, j, k);
             }
             avg /= 3;
             unsigned char bw = (avg >= 128) ? 255 : 0;
-            for (int k = 0; k < 3; k++) {
+            for (int k = 0; k < 3; k++) 
+            {
                 img(i, j, k) = bw;
             }
         }
     }
 }
 
-//--------------------------------------------------Filter 3--------------------------------------------------------------------
-
-    Image my_image("my_image.jpg");
-    for (int x = 0; x < my_image.height; x++)
-    {
-        for (int y = 0; y < my_image.width; y++)
-        {
-            for (int c = 0; c <= 2; c++)
-            {
-                unsigned char& new_pixel = my_image(y, x, c);
+//  Invert Image 
+void Invert(Image& img) {
+    for (int x = 0; x < img.height; x++) {
+        for (int y = 0; y < img.width; y++) {
+            for (int c = 0; c <= 2; c++) {
+                unsigned char& new_pixel = img(y, x, c);
                 new_pixel = 255 - new_pixel;
             }
         }
     }
-    my_image.saveImage("inverted_2.jpg");
 }
-//--------------------------------------------------Filter 4--------------------------------------------------------------------
 
-void Photoframe() {
-    cout << "1-simple frame  2-ornamental frame " << endl << "enter number" << endl;
-    int n;
-    cin >> n;
-    Image image("luffy.jpg");
-    for (int i = 0; i < image.width; i++) {
-
-        for (int j = 0; j < image.height; j++) {
-
-            for (int k = 0; k < image.channels; ++k) {
-
-                if (i <= 10 || j <= 10 || i >= image.width - 10 || j >= image.height - 10)
-                {
-                    if (n == 1)
-                    {
-                        image(i, j, 0) = 0;    // Red
-                        image(i, j, 1) = 0;    // Green
-                        image(i, j, 2) = 255;  // Blue
-                    }
-                    else if (n == 2)
-                    {
-
-                        image(i, j, 0) = 0;    // Red
-                        image(i, j, 1) = 0;    // Green
-                        image(i, j, 2) = 255;  // Blue
-
-                        if (i < 20 && j < 20)
-                        {
-                            image(i, j, 0) = 255;
-                            image(i, j, 1) = 255;
-                            image(i, j, 2) = 255;
-                        }
-
-                        if (i >= image.width - 20 && j < 20)
-                        {
-                            image(i, j, 0) = 255;
-                            image(i, j, 1) = 255;
-                            image(i, j, 2) = 255;
-                        }
-                        if (i < 20 && j >= image.height - 20)
-                        {
-                            image(i, j, 0) = 255;
-                            image(i, j, 1) = 255;
-                            image(i, j, 2) = 255;
-                        }
-                        if (i >= image.width - 20 && j >= image.height - 20)
-                        {
-                            image(i, j, 0) = 255;
-                            image(i, j, 1) = 255;
-                            image(i, j, 2) = 255;
-                        }
-
-
+// Add Frame Image 
+void Frame(Image& img, int n) {
+    for (int i = 0; i < img.width; i++) {
+        for (int j = 0; j < img.height; j++) {
+            if (i <= 10 || j <= 10 || i >= img.width - 10 || j >= img.height - 10) {
+                if (n == 1) {
+                    img(i, j, 0) = 0;
+                    img(i, j, 1) = 0;
+                    img(i, j, 2) = 255;
+                }
+                else if (n == 2) {
+                    img(i, j, 0) = 0;
+                    img(i, j, 1) = 0;
+                    img(i, j, 2) = 255;
+                    if ((i < 20 && j < 20) || (i >= img.width - 20 && j < 20) ||
+                        (i < 20 && j >= img.height - 20) || (i >= img.width - 20 && j >= img.height - 20)) {
+                        img(i, j, 0) = 255;
+                        img(i, j, 1) = 255;
+                        img(i, j, 2) = 255;
                     }
                 }
-
             }
         }
     }
-
-
-
-
-    image.saveImage("hello.png");
-
 }
-//--------------------------------------------------Filter 5------------------------------------------------------------
-    // Vertical Flip
-Image vertical("../OIP.png");
 
-for (int y = 0; y < vertical.height / 2; y++)
-{
-    for (int x = 0; x < vertical.width; x++)
-    {
-        for (int c = 0; c < 3; c++)
-        {
-            swap(
-                vertical(x, y, c),
-                vertical(x, vertical.height - 1 - y, c)
-            );
+//  Flip Image 
+void Flip(Image& img) {
+    for (int y = 0; y < img.height / 2; y++) {
+        for (int x = 0; x < img.width; x++) {
+            for (int c = 0; c < 3; c++) {
+                swap(img(x, y, c), img(x, img.height - 1 - y, c));
+            }
         }
     }
 }
 
-vertical.saveImage("flipped_vertical.png");
-
-return 0;
-}
-//--------------------------------------------------Filter 6--------------------------------------------------------------------
-void Rotate(Image& img) {
+// Rotate Image
+void Rotate(Image& img)
+{
     Image rotated_img(img.height, img.width);
     for (int i = 0; i < img.width; i++) {
-        for (int j = 0; j < img.height; j++) {
-            for (int k = 0; k < img.channels; k++) {
+        for (int j = 0; j < img.height; j++) 
+        {
+            for (int k = 0; k < img.channels; k++)
+            {
                 unsigned char value = img.getPixel(i, j, k);
                 rotated_img.setPixel(j, rotated_img.height - 1 - i, k, value);
             }
@@ -180,7 +154,8 @@ void Rotate(Image& img) {
     img = rotated_img;
 }
 
-void getAngle(Image& img) {
+void getAngle(Image& img) 
+{
     int rotateAngle;
     while (true) {
         cout << "Enter Rotation Angle (90, 180, 270): ";
@@ -194,260 +169,528 @@ void getAngle(Image& img) {
     }
 }
 
-//--------------------------------------------------Filter 7--------------------------------------------------------------------
-    /* filter 7                       دوسي ع زرار الرن كمان مرة لما تيجي تخلي الصورة منورة اكتر عشان الملف يظهر*/
-
-
-{
-    Image my_image("my_image.jpg");
-    cout << "Dark OR light ";
+//  Darken & Lighten Image 
+void DarkenandLighten(Image& img) {
+    cout << "Dark OR light: ";
+    string choice;
+    cin >> choice;
     int constant = 0;
-    string choice = "";
-    getFilter7Input(choice, constant);
-    if (choice == "Dark") {
-        cout << "choose the level of darkening from 0 to 100% ";
-        for (int x = 0; x < my_image.height; x++)
-        {
-            for (int y = 0; y < my_image.width; y++)
-            {
-                for (int c = 0; c <= 2; c++)
-                {
-                    unsigned char& pixel_7 = my_image(y, x, c);
-                    int value = pixel_7 - constant;
-                    if (value >= 0) {
-                        pixel_7 = value;
-                    }
-                    else {
-                        pixel_7 = 0;
-                    }
-                }
-            }
-        }
-        my_image.saveImage("Dark.jpg");
-    }
-    if (choice == "light") {
-        cout << "choose the level of lighting from 0 to 100%";
+
+    if (choice == "Dark" || choice == "dark") {
+        cout << "Choose the level of darkening from 0 to 100: ";
         cin >> constant;
-        for (int x = 0; x < my_image.height; x++)
-        {
-            for (int y = 0; y < my_image.width; y++)
-            {
-                for (int c = 0; c <= 2; c++)
-                {
-                    unsigned char& pixel_7 = my_image(y, x, c);
-                    int value_2 = pixel_7 + constant;
-                    if (value_2 < 255) {
-                        pixel_7 = value_2;
-                    }
-                    else {
-                        pixel_7 = 255;
-                    }
+        for (int x = 0; x < img.height; x++) {
+            for (int y = 0; y < img.width; y++) {
+                for (int c = 0; c <= 2; c++) {
+                    unsigned char& pixel_7 = img(y, x, c);
+                    int value = pixel_7 - constant;
+                    pixel_7 = (value >= 0) ? value : 0;
                 }
             }
         }
-        my_image.saveImage("light.jpg");
     }
-    return 0;
-}}
+    else if (choice == "light" || choice == "Light") {
+        cout << "Choose the level of lighting from 0 to 100: ";
+        cin >> constant;
+        for (int x = 0; x < img.height; x++) {
+            for (int y = 0; y < img.width; y++) {
+                for (int c = 0; c <= 2; c++) {
+                    unsigned char& pixel_7 = img(y, x, c);
+                    int value_2 = pixel_7 + constant;
+                    pixel_7 = (value_2 < 255) ? value_2 : 255;
+                }
+            }
+        }
+    }
+}
 
-//--------------------------------------------------Filter 8------------------------------------------------------------
+//  Resizing Images 
+void Resize(Image& image, int target_w, int target_h) {
+    Image image2(target_w, target_h);
+    double avg = (double)image.width / target_w;
+    double avg2 = (double)image.height / target_h;
 
-
-void size() {                                    //الفلتر 8
-    Image image("toy1.jpg");
-    int w, h;
-    cout << "Enter target width and height: ";
-    cin >> w >> h;
-
-    Image image2(w, h);
-    double avg = (double)image.width / image2.width;
-    double avg2 = (double)image.height / image2.height;
-
-    for (int i = 0; i < image2.width; i++) {
-        for (int j = 0; j < image2.height; j++) {
-
+    for (int i = 0; i < target_w; i++) {
+        for (int j = 0; j < target_h; j++) {
             int orgx = min((int)(i * avg), image.width - 1);
             int orgy = min((int)(j * avg2), image.height - 1);
-
             for (int k = 0; k < image2.channels; ++k) {
                 image2.setPixel(i, j, k, image.getPixel(orgx, orgy, k));
             }
         }
     }
+    image = image2;
+}
 
-    image2.saveImage("toy2.png");
-    cout << "Image resized and saved as toy2.png" << endl;
+//  Merge Image 
+void Merge(Image& imag1, Image& imag2) {
+    int width = min(imag1.width, imag2.width);
+    int height = min(imag1.height, imag2.height);
+    Image merged(width, height);
+
+    for (int x = 0; x < width; x++) {
+        for (int y = 0; y < height; y++) {
+            int R = (imag1(x, y, 0) + imag2(x, y, 0)) / 2;
+            int G = (imag1(x, y, 1) + imag2(x, y, 1)) / 2;
+            int B = (imag1(x, y, 2) + imag2(x, y, 2)) / 2;
+            merged(x, y, 0) = R;
+            merged(x, y, 1) = G;
+            merged(x, y, 2) = B;
+        }
+    }
+    imag1 = merged;
+}
+
+void Merge_With_Resize(Image& img1, Image& img2) {
+    if (img1.width != img2.width || img1.height != img2.height) {
+        Resize(img2, img1.width, img1.height);
+    }
+    Merge(img1, img2);
+}
+
+//  Detect Image Edges 
+Image EdgeDetection(Image grayscale)
+{
+    Image output(grayscale.width, grayscale.height);
+    int threshold = 100;
+    for (int i = 1; i < grayscale.width - 1; ++i) {
+        for (int j = 1; j < grayscale.height - 1; ++j) 
+        {
+            int gx = grayscale(i + 1, j - 1, 0) + 2 * grayscale(i + 1, j, 0) + grayscale(i + 1, j + 1, 0) - grayscale(i - 1, j - 1, 0) - 2 * grayscale(i - 1, j, 0) - grayscale(i - 1, j + 1, 0);
+            int gy = grayscale(i - 1, j + 1, 0) + 2 * grayscale(i, j + 1, 0) + grayscale(i + 1, j + 1, 0) - grayscale(i - 1, j - 1, 0) - 2 * grayscale(i, j - 1, 0) - grayscale(i + 1, j - 1, 0);
+            int magnitude = sqrt(gx * gx + gy * gy);
+            unsigned char color = (magnitude > threshold) ? 0 : 255;
+            output(i, j, 0) = color;
+            output(i, j, 1) = color;
+            output(i, j, 2) = color;
+        }
+    }
+    return output;
+}
+
+//  Crop Image 
+void Crop(Image& my_image) {
+    int new_w, new_h, new_x, new_y;
+    cout << "Please enter start point (x y), new pic width and height: \n";
+    cin >> new_x >> new_y >> new_w >> new_h;
+
+    if (new_w > 0 && new_h > 0 && new_x >= 0 && new_y >= 0 && new_x + new_w <= my_image.width && new_y + new_h <= my_image.height) {
+        Image croped_image(new_w, new_h);
+        for (int h = 0; h < new_h; h++) {
+            for (int w = 0; w < new_w; w++) {
+                for (int c = 0; c <= 2; c++) {
+                    croped_image.setPixel(w, h, c, my_image.getPixel(w + new_x, h + new_y, c));
+                }
+            }
+        }
+        my_image = croped_image;
+    }
+    else {
+        cout << "Please enter valid numbers \n";
+    }
+}
+
+//  Blur Image 
+void Blur(Image& image2) {
+    int level;
+    cout << "Enter the level of blurring: ";
+    cin >> level;
+    Image image(image2.width, image2.height);
+
+    for (int i = 0; i < image.width; i++) {
+        for (int j = 0; j < image.height; j++) {
+            int r = 0, g = 0, b = 0, count = 0;
+            for (int x = -level; x <= level; x++) {
+                for (int y = -level; y <= level; y++) {
+                    if (i + x >= 0 && i + x < image2.width && j + y >= 0 && j + y < image2.height) {
+                        r += image2(i + x, j + y, 0);
+                        g += image2(i + x, j + y, 1);
+                        b += image2(i + x, j + y, 2);
+                        count++;
+                    }
+                }
+            }
+            image.setPixel(i, j, 0, r / count);
+            image.setPixel(i, j, 1, g / count);
+            image.setPixel(i, j, 2, b / count);
+        }
+    }
+    image2 = image;
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
-int main() {
-    string filename;
-    Image img;
+//Sunlight Correction
+void SunlightCorrection(Image& img) {
+    for (int x = 0; x < img.width; x++) {
+        for (int y = 0; y < img.height; y++) {
+            int R = img(x, y, 0);
+            int G = img(x, y, 1);
+            int B = img(x, y, 2);
 
-    while (true) {
-        cout << "Enter The Image File Name with extension: ";
-        cin >> filename;
-        try {
-            img.loadNewImage(filename);
-            break;
-        }
-        catch (...) {
-            cout << "Error loading image! Make sure the file exists in the directory.\n\n";
+            R = min(255, int(R * 1.2 + 20));
+            G = min(255, int(G * 1.1 + 15));
+            B = min(255, int(B * 0.95));
+
+            img(x, y, 0) = R;
+            img(x, y, 1) = G;
+            img(x, y, 2) = B;
         }
     }
+}
 
-    bool editing = true;
-    while (editing) {
-        cout << "\n=============================================\n";
-        cout << "       Welcome to CS213 Photo Editor         \n";
-        cout << "=============================================\n\n";
+// Old TV Filter 
+void applyOldTV(Image& image) 
+{
+    const double dark1 = 0.85;
+    const double dark2 = 0.9;
+    const double redTint = 0.95;
+    const double blueTint = 1.1;
 
-        cout << "  1  - Grayscale Filter         Convert image to shades of gray\n";
-        cout << "  2  - Black & White            Convert image to pure black & white\n";
-        cout << "  3  - Invert Colors            Invert all pixel colors\n";
-        cout << "  4  - Merge Images             Blend two images together\n";
-        cout << "  5  - Flip Image               Flip image horizontally or vertically\n";
-        cout << "  6  - Rotate Image             Rotate image by a given angle\n";
-        cout << "  7  - Brightness Control       Darken or lighten image\n";
-        cout << "  8  - Crop Image               Crop a selected region of image\n\n";
+    for (int y = 0; y < image.height; ++y) 
+    {
+        for (int x = 0; x < image.width; ++x) 
+        {
+            unsigned char r = image(x, y, 0);
+            unsigned char g = image(x, y, 1);
+            unsigned char b = image(x, y, 2);
 
-        cout << "Choose a filter by typing its number (1-8): ";
-        int choice;
-        cin >> choice;
+            if (y % 4 == 0) 
+            {
+                r = static_cast<unsigned char>(r * dark1);
+                g = static_cast<unsigned char>(g * dark1);
+                b = static_cast<unsigned char>(b * dark1);
+            }
+            else if (y % 4 == 2)
+            {
+                r = static_cast<unsigned char>(r * dark2);
+                g = static_cast<unsigned char>(g * dark2);
+                b = static_cast<unsigned char>(b * dark2);
+            }
 
-        if (choice == 1) {
-            Grayscale(img);
+            r = static_cast<unsigned char>(min(255, int(r * redTint)));
+            b = static_cast<unsigned char>(min(255, int(b * blueTint)));
+
+            image(x, y, 0) = r;
+            image(x, y, 1) = g;
+            image(x, y, 2) = b;
         }
-        else if (choice == 2) {
-            BW(img);
+    }
+}
+
+//  Purple Filter 
+void Purple(Image& img) {
+    for (int j = 0; j < img.height; j++) {
+        for (int i = 0; i < img.width; i++) {
+            unsigned char red = img(i, j, 0);
+            unsigned char green = img(i, j, 1);
+            unsigned char blue = img(i, j, 2);
+
+            int nred = min(255, max(0, (int)(red * 1.1)));
+            int ngreen = min(255, max(0, (int)(green * 0.6)));
+            int nblue = min(255, max(0, (int)(blue * 1.4)));
+
+            img(i, j, 0) = (unsigned char)nred;
+            img(i, j, 1) = (unsigned char)ngreen;
+            img(i, j, 2) = (unsigned char)nblue;
         }
-        else if (choice == 3) {
-            Invert(img);
+    }
+}
+
+//  Infrared Filter 
+void infraredFilter(Image& image) {
+    for (int i = 0; i < image.width; i++) {
+        for (int j = 0; j < image.height; j++) {
+            int g = image(i, j, 1);
+            int b = image(i, j, 2);
+
+            image.setPixel(i, j, 0, 255);
+            image.setPixel(i, j, 1, 255 - g);
+            image.setPixel(i, j, 2, 255 - b);
         }
-        else if (choice == 4) {
-            string filename2;
-            Image img2;
-            while (true) {
-                cout << "Enter second image filename: ";
-                cin >> filename2;
-                try {
-                    img2.loadNewImage(filename2);
-                    break;
-                }
-                catch (...) {
-                    cout << "Error loading second image! Try again.\n";
+    }
+}
+
+//  Image Skewing / Warp (BONUS) 
+Image warpImage(Image& image) {
+    return image;
+}
+
+//  Oil Painting (BONUS)
+void oilPaint(Image& image, int radius = 3, int intensityLevels = 20)
+{
+    Image temp = image;
+    for (int y = radius; y < image.height - radius; y++) 
+    {
+        for (int x = radius; x < image.width - radius; x++) 
+        {
+            vector<int> intensityCount(intensityLevels, 0);
+            vector<int> rSum(intensityLevels, 0), gSum(intensityLevels, 0), bSum(intensityLevels, 0);
+
+            for (int j = -radius; j <= radius; j++)
+            {
+                for (int i = -radius; i <= radius; i++) 
+                {
+                    unsigned char r = temp(x + i, y + j, 0);
+                    unsigned char g = temp(x + i, y + j, 1);
+                    unsigned char b = temp(x + i, y + j, 2);
+
+                    int intensity = (r + g + b) / 3 * intensityLevels / 255;
+                    if (intensity >= intensityLevels) intensity = intensityLevels - 1;
+
+                    intensityCount[intensity]++;
+                    rSum[intensity] += r;
+                    gSum[intensity] += g;
+                    bSum[intensity] += b;
                 }
             }
 
+            int maxCount = 0, maxIndex = 0;
+            for (int i = 0; i < intensityLevels; i++) 
+            {
+                if (intensityCount[i] > maxCount) 
+                {
+                    maxCount = intensityCount[i];
+                    maxIndex = i;
+                }
+            }
+
+            if (maxCount > 0) 
+            {
+                image(x, y, 0) = rSum[maxIndex] / maxCount;
+                image(x, y, 1) = gSum[maxIndex] / maxCount;
+                image(x, y, 2) = bSum[maxIndex] / maxCount;
+            }
+        }
+    }
+}
+
+
+int main() {
+    bool editing = true;
+    while (editing) {
+        cout << "=============================================\n";
+        cout << "        Welcome to CS213 Photo Editor        \n";
+        cout << "=============================================\n\n";
+
+        cout << "  01 - Grayscale Filter\n";
+        cout << "  02 - Black and White Filter\n";
+        cout << "  03 - Invert Image\n";
+        cout << "  04 - Add Frame Image\n";
+        cout << "  05 - Flip Image\n";
+        cout << "  06 - Rotate Image\n";
+        cout << "  07 - Darken and Lighten Image\n";
+        cout << "  08 - Resizing Images\n";
+        cout << "  09 - Merge Images\n";
+        cout << "  10 - Detect Image Edges\n";
+        cout << "  11 - Crop Images\n";
+        cout << "  12 - Blur Images\n";
+        cout << "  13 - Sunlight Correction\n";
+        cout << "  14 - Old TV Filter\n";
+        cout << "  15 - Purple Filter\n";
+        cout << "  16 - Infrared Filter\n";
+        cout << "  17 - Image Skewing (BONUS)\n";
+        cout << "  18 - Oil Painting (BONUS)\n\n";
+        cout << "  0  -> Back / Choose Another Image\n\n";
+
+
+        cout << "Enter The File Name with its extension (e.g., image.jpg): ";
+        string filename;
+        cin >> filename;
+        Image img(filename);
+
+        cout << "Choose a filter by typing its number (1-18):\n";
+        int choice;
+        cin >> choice;
+
+        
+            
+        if (choice == 0)
+        {
+            continue;
+
+
+        if (choice == 1)
+        {
+            GrayscaleFilter(img);
+        }
+        else if (choice == 2) 
+        {
+            BW(img);
+        }
+        else if (choice == 3) 
+        {
+            Invert(img);
+        }
+        else if (choice == 4) 
+        {
+            while (true) 
+            {
+                cout << "Choose Frame Color/Type:\nSimple -> 1\nOrnamental -> 2\n";
+                int color;
+                cin >> color;
+                if (color == 1 || color == 2)
+                {
+                    Frame(img, color);
+                    break;
+                }
+                else {
+                    cout << "Choose valid option (1, 2)\n";
+                }
+            }
+        }
+        else if (choice == 5)
+        {
+            Flip(img);
+        }
+        else if (choice == 6)
+        {
+            getAngle(img);
+        }
+        else if (choice == 7) 
+        {
+            DarkenandLighten(img);
+        }
+        else if (choice == 8)
+        {
+            int w, h;
+            cout << "Enter Width then Height: ";
+            cin >> w >> h;
+            Resize(img, w, h);
+        }
+        else if (choice == 9)
+        {
+            int merge_option;
+            cout << "Enter second filename: ";
+            string filename2;
+            cin >> filename2;
+            Image img2(filename2);
+
             while (true) {
-                cout << "\nChoose Merge mode:\n";
+                cout << "Choose Merge mode:\n";
                 cout << "1 - Resize smaller image to match the bigger one\n";
                 cout << "2 - Merge only the common overlapping area\n";
                 cout << "Enter your choice (1, 2): ";
-                int merge_option;
                 cin >> merge_option;
 
-                if (merge_option == 1) {
+                if (merge_option == 1)
+                {
                     Merge_With_Resize(img, img2);
                     break;
                 }
-                else if (merge_option == 2) {
+                else if (merge_option == 2) 
+                {
                     Merge(img, img2);
                     break;
                 }
                 else {
-                    cout << "Invalid option! Choose 1 or 2.\n";
+                    cout << "Choose valid option (1, 2)\n";
                 }
             }
         }
-        else if (choice == 5) {
-            Flip(img);
+        else if (choice == 10) 
+        {
+            cout << "To detect edges, we first need a grayscale image.\n";
+            Image gray = img;
+            GrayscaleFilter(gray);
+            img = EdgeDetection(gray);
         }
-        else if (choice == 6) {
-            getAngle(img);
-        }
-        else if (choice == 7) {
-            DarkenandLighten(img);
-        }
-        else if (choice == 8) {
+        else if (choice == 11) 
+        {
             Crop(img);
         }
-        else {
-            cout << "Invalid Option! Please enter a number from 1 to 8.\n";
+        else if (choice == 12)
+        {
+            Blur(img);
+        }
+        else if (choice == 13)
+        {
+            SunlightCorrection(img);
+        }
+        else if (choice == 14) 
+        {
+            applyOldTV(img);
+        }
+        else if (choice == 15) 
+        {
+            Purple(img);
+        }
+        else if (choice == 16) 
+        {
+            infraredFilter(img);
+        }
+        else if (choice == 17) 
+        
+        {
+            img = warpImage(img);
+        }
+        else if (choice == 18) 
+        {
+            oilPaint(img);
+        }
+        else 
+        {
+            cout << "Invalid choice! Please try again.\n";
             continue;
         }
 
-        // --- Save Section ---
         string savedFileName = filename;
-        while (true) {
-            cout << "\n1. Save in same file\n2. Save in new file\nChoice: ";
+        while (true) 
+        {
+            cout << "Save in same file -> 1\nSave in new file -> 2\nEnter choice: ";
             int n;
             cin >> n;
-            if (n == 1) {
+            if (n == 1) 
+            {
                 img.saveImage(filename);
                 savedFileName = filename;
                 break;
             }
-            else if (n == 2) {
+            else if (n == 2) 
+            {
+
                 string newName;
-                cout << "Enter new filename with extension (.jpg, .bmp, .png): ";
+                cout << "Enter the new name with extension (.jpg, .bmp, .png): ";
                 cin >> newName;
                 img.saveImage(newName);
                 savedFileName = newName;
                 break;
             }
-            else {
-                cout << "Invalid option (1, 2)!\n";
+            else
+            {
+                cout << "Choose valid option (1, 2)\n";
             }
         }
 
-        // Auto Preview
-        string cmd = "\"" + savedFileName + "\"";
-        system(cmd.c_str());
+        system(savedFileName.c_str());
 
-        // --- Rating Section ---
-        cout << "\nDid you like the result? (Rate 1 to 5): ";
+        cout << "\nDid you like the result? (Rate 1 to 10): ";
         int rate;
         cin >> rate;
+        if (rate >= 9) cout << "Glad you loved it! \n";
+        else if (rate == 7) cout << "Not bad! We'll keep improving \n";
+        else cout << "Thanks for the feedback, we will do better next time!\n";
 
-        if (rate >= 4) cout << "Glad you loved it!\n";
-        else if (rate == 3) cout << "Not bad! We'll keep improving.\n";
-        else cout << "Thanks for the feedback!\n";
-
-        // --- Continue / Exit Section ---
-        while (true) {
+        while (true) 
+        {
             char option;
-            cout << "\nContinue editing this image -> C\nLoad new image -> N\nExit program -> E\nChoice: ";
+            cout << "\nContinue editing -> C\nExit program -> E\nEnter choice: "<< endl;
             cin >> option;
             option = toupper(option);
-            if (option == 'E') {
+            if (option == 'E') 
+            {
                 editing = false;
                 break;
             }
-            else if (option == 'C') {
+            else if (option == 'C') 
+            {
                 break;
             }
-            else if (option == 'N') {
-                while (true) {
-                    cout << "Enter new Image File Name with extension: ";
-                    cin >> filename;
-                    try {
-                        img.loadNewImage(filename);
-                        break;
-                    }
-                    catch (...) {
-                        cout << "Error loading image! Try again.\n";
-                    }
-                }
-                break;
-            }
-            else {
-                cout << "Invalid option (C, N, E)!\n";
+            else
+            {
+                cout << "Choose valid option (C, E)\n" <<endl;
             }
         }
     }
 
-    cout << "Thank you for using Pixora/CS213 Photo Editor. Goodbye!\n";
     return 0;
 }

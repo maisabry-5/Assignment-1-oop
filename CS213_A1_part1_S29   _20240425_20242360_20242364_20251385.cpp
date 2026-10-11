@@ -1,12 +1,24 @@
 
-/* =================================part 1 =============================== 
+/* 
 //Team Members & Work Distribution:
-1-kenzi ahmed raof:ID:20240425_filter:1,5
-2-mai sabry shappan:ID:20242360_filter:2,6
-3-nadeen osama marzok:ID:20242364_filter:3,7
-4-marwa mohamed abdelsamad:ID:20251385_filter:4,8
-section:s
-====================================
+
+1- Name:kinzy ahmed raouf
+  ID:20240425
+  filter:1,5
+  Section:s39,40
+2- Name: Mai sabry shappan
+   ID:20242360
+    filter:2,6
+    Sectiion:s39,40
+3- Name: Nadeen osama marzok
+   ID:20242364
+   filter:3,7
+   Section:s
+4- Name: Marwa mohamed abdelsamad
+   ID:20251385
+   filter:4,8
+   Section:s33,34
+
 */
 
 #include <iostream>
@@ -18,8 +30,7 @@ section:s
 using namespace std;
 
 
-
-//-------------------------------------------------Filter 1---------------------------------------------------------
+//Grayscale Filter
 Image image("../OIP.png");
 
 for (int y = 0; y < image.height; y++)
@@ -43,7 +54,7 @@ image.saveImage("grayscale.png");
 return 0;
 }
 
-//-------------------------------------------------Filter 2-------------------------------------------------------------
+//Black & White Filter
 void BW(Image& img) {
     for (int j = 0; j < img.height; j++) {
         for (int i = 0; i < img.width; i++) {
@@ -60,8 +71,8 @@ void BW(Image& img) {
     }
 }
 
-//--------------------------------------------------Filter 3--------------------------------------------------------------------
 
+//Invert Image   
     Image my_image("my_image.jpg");
     for (int x = 0; x < my_image.height; x++)
     {
@@ -76,8 +87,9 @@ void BW(Image& img) {
     }
     my_image.saveImage("inverted_2.jpg");
 }
-//--------------------------------------------------Filter 4--------------------------------------------------------------------
 
+
+//Add Frame Image
 void Photoframe() {
     cout << "1-simple frame  2-ornamental frame " << endl << "enter number" << endl;
     int n;
@@ -144,8 +156,8 @@ void Photoframe() {
     image.saveImage("hello.png");
 
 }
-//--------------------------------------------------Filter 5------------------------------------------------------------
-    // Vertical Flip
+
+   //Flip Image
 Image vertical("../OIP.png");
 
 for (int y = 0; y < vertical.height / 2; y++)
@@ -166,7 +178,9 @@ vertical.saveImage("flipped_vertical.png");
 
 return 0;
 }
-//--------------------------------------------------Filter 6--------------------------------------------------------------------
+
+
+//Rotate Image
 void Rotate(Image& img) {
     Image rotated_img(img.height, img.width);
     for (int i = 0; i < img.width; i++) {
@@ -194,11 +208,8 @@ void getAngle(Image& img) {
     }
 }
 
-//--------------------------------------------------Filter 7--------------------------------------------------------------------
-    /* filter 7                       دوسي ع زرار الرن كمان مرة لما تيجي تخلي الصورة منورة اكتر عشان الملف يظهر*/
 
-
-{
+    //Darken & Lighten Image
     Image my_image("my_image.jpg");
     cout << "Dark OR light ";
     int constant = 0;
@@ -250,10 +261,10 @@ void getAngle(Image& img) {
     return 0;
 }}
 
-//--------------------------------------------------Filter 8------------------------------------------------------------
 
 
-void size() {                                    //الفلتر 8
+//Resizing Images
+void size() {                               
     Image image("toy1.jpg");
     int w, h;
     cout << "Enter target width and height: ";
@@ -280,7 +291,7 @@ void size() {                                    //الفلتر 8
 }
 
 
-//----------------------------------------------------------------------------------------------------------------------
+
 int main() {
     string filename;
     Image img;

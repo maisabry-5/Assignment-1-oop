@@ -35,7 +35,7 @@ The program supports **16 filters and 2 bonus filters and GUI** (18 filters in t
 ---------
 
 
-## 🎨 Available Filters (16 Filters Total)
+## 🎨 Available Filters (18 Filters Total)
 
 | # | Filter Name |
 |---|-------------|
@@ -55,9 +55,11 @@ The program supports **16 filters and 2 bonus filters and GUI** (18 filters in t
 | **14** | *Old TV Filter* |
 | **15** | *Purple Filter* | 
 | **16** | *Infrared Filter* | 
+| **17** | *Image Skewing(BONUS)*|  
+| **18** | *Oil Painting(BONUS)*|  
 
 
---------
+------------
 
 ## 🤝 Work Division
 
@@ -69,15 +71,14 @@ The program supports **16 filters and 2 bonus filters and GUI** (18 filters in t
 
 - **Marwa Mohamed Abdelsamd (Filters 4, 8, 12, 16):** *Add Frame, Resizing Images, Blur Images, Infrared Filter*
 
-     *(**Repo & Menu & README** are common between all members)*
+     *(**Repo & Menu & README & BONUS FILTERS 17,18 and GUI** are common between all members)*
 
 --------
 
 ## ⚙️ How to Run
 1. Clone the repo:
-   ```bash
-   git clone [https://github.com/Moon124-bit/Pixora---Inage-Filters.git](https://github.com/Moon124-bit/Pixora---Inage-Filters.git)
-   cd Pixora---Inage-Filters
+   ```bash   
+
    
 2. Compile:
    ```bash
@@ -182,5 +183,13 @@ The program supports **16 filters and 2 bonus filters and GUI** (18 filters in t
 
 --------
 
+## [17] Image Skewing Filter (Bonus):
 
+This filter distorts and skews the image along the vertical or horizontal axes by a user-entered degree to create perspective and 3D slants.  
 
+----------
+## [18] Oil paint filter (Bonus):
+
+This filter makes an image look like an oil painting by looking at the color of neighboring pixels in a small radius, grouping pixels with the same brightness, and changing the color shade to the average color of the most popular brightness group to create an oil painterly effect.
+
+----------

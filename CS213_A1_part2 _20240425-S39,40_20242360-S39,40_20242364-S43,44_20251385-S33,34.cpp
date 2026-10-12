@@ -378,24 +378,28 @@ void applyOldTV(Image& image)
 }
 
 //  Purple Filter 
-void Purple(Image& img) {
-    for (int j = 0; j < img.height; j++) {
-        for (int i = 0; i < img.width; i++) {
-            unsigned char red = img(i, j, 0);
-            unsigned char green = img(i, j, 1);
-            unsigned char blue = img(i, j, 2);
+{Image my_image("my_image.jpg");
+            for (int x = 0; x < my_image.height; x++)
+            {
+                for (int y = 0; y < my_image.width; y++)
+                {
+                    for (int c = 0; c <= 2; c++)
+                    {
+                        unsigned char& pixel_15 = my_image(y, x, c);
+                        int color = pixel_15 ;
+                        if(c == 0 || c == 2){
+                            if(color > 225){
+                                pixel_15 = 255;
+                            }
+                            else {
+                                pixel_15 = color + 30;
+                            }
+                        }
 
-            int nred = min(255, max(0, (int)(red * 1.1)));
-            int ngreen = min(255, max(0, (int)(green * 0.6)));
-            int nblue = min(255, max(0, (int)(blue * 1.4)));
-
-            img(i, j, 0) = (unsigned char)nred;
-            img(i, j, 1) = (unsigned char)ngreen;
-            img(i, j, 2) = (unsigned char)nblue;
-        }
-    }
-}
-
+                    }
+                }
+            }
+            my_image.saveImage("Purple.jpg");}
 //  Infrared Filter 
 void infraredFilter(Image& image) {
     for (int i = 0; i < image.width; i++) {
